@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jspsych-6.1.0/jspsych.js"></script>
+    <script src="jspsych-6.1.0/plugins/jspsych-html-button-response.js"></script>
+    <link rel="stylesheet" href="jspsych-6.1.0/css/jspsych.css"></link>
+    <style>
+      img { width: 300px; }
+    </style>
+  </head>
+  <body></body>
+  <script>
+
+  var timeline = [];
+  
+  timeline.push({
+    type: 'html-button-response',
+    stimulus: '',
+    choices: ["START"],
+    prompt: ""
+  });
+  
+  //first autoplay the left side
+  timeline.push({
+    type: 'html-button-response',
+    stimulus: '',
+    choices: [
+		'<div><video id="jspsych-video-button-response-stimulus" width="640" height = "360" autoplay><source src="jspsych-6.1.0/examples/video/sample_video.mp4" type="video/mp4"></video></div>', 
+		'<div><video id="jspsych-video-button-response-stimulus" width="640" height = "360"><source src="jspsych-6.1.0/examples/video/sample_video.mp4" type="video/mp4"></video></div>'],
+    prompt: "<p>Look at the videos.</p>",
+		trial_duration: 6000,
+		response_ends_trial: false
+  });
+  
+  //then autoplay the right side
+  timeline.push({
+    type: 'html-button-response',
+    stimulus: '',
+    choices: [
+		'<div><video id="jspsych-video-button-response-stimulus" width="640" height = "360"><source src="jspsych-6.1.0/examples/video/sample_video.mp4" type="video/mp4"></video></div>', 
+		'<div><video id="jspsych-video-button-response-stimulus" width="640" height = "360" autoplay><source src="jspsych-6.1.0/examples/video/sample_video.mp4" type="video/mp4"></video></div>'],
+    prompt: "<p>Look at the videos.</p>",
+		trial_duration: 6000,
+		response_ends_trial: false
+  });
+  
+  //now play both videos
+  timeline.push({
+    type: 'html-button-response',
+    stimulus: '',
+    choices: [
+		'<div><video id="jspsych-video-button-response-stimulus" width="640" height = "360" autoplay><source src="jspsych-6.1.0/examples/video/sample_video.mp4" type="video/mp4"></video></div>', 
+		'<div><video id="jspsych-video-button-response-stimulus" width="640" height = "360" autoplay><source src="jspsych-6.1.0/examples/video/sample_video.mp4" type="video/mp4"></video></div>'],
+    prompt: "<p>Look at the videos.</p>",
+		trial_duration: 6000,
+		response_ends_trial: false
+  });
+  
+  //video to preload
+  var video_preload = ["jspsych-6.1.0/examples/video/sample_video.mp4"];
+
+  jsPsych.init({
+    timeline: timeline,
+	  default_iti: 0,
+	  //preload_video: video_preload,
+    on_finish: function(){jsPsych.data.displayData();}
+  });
+
+  </script>
+</html>
